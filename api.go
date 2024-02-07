@@ -5,36 +5,30 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"gorm.io/gorm"
 )
 
 type APIServer struct {
-	addres  string
-	storage *Storage
+	addres string
+	client *Client
 }
 
-func NewAPIServer(addres string, db *gorm.DB) *APIServer {
+func NewAPIServer(addres string) *APIServer {
+	httpClient := &http.Client{}
 	return &APIServer{
 		addres: addres,
-		storage: &Storage{
-			db: db,
+		client: &Client{
+			httpClient: httpClient,
 		},
 	}
 }
 
 func (s *APIServer) Run() {
-	s.migrate()
 
 	router := mux.NewRouter()
 
 	router.HandleFunc("/hello", s.handleGreet).Methods("GET")
-	router.HandleFunc("/folder/{id}", s.handleGetFolder).Methods("GET")
-	router.HandleFunc("/folder", s.handleCreatePost).Methods("POST")
+	router.HandleFunc("/login", s.handleLogin).Methods("POST")
 
 	http.ListenAndServe(s.addres, router)
 	fmt.Println("Server started...")
-}
-
-func (s *APIServer) migrate() {
-	s.storage.db.AutoMigrate(&Folder{})
 }

@@ -1,21 +1,32 @@
 package main
 
-import (
-	"time"
+import "net/http"
 
-	"gorm.io/gorm"
-)
-
-type Folder struct {
-	ID        int64     `json:"id" gorm:"primaryKey"`
-	Title     string    `json:"title"`
-	CreatedAt time.Time `json:"created_at"`
+type KeycloakService interface {
+	login(payload *KloginPayload) error
 }
 
-type CreatePostPayload struct {
-	Title string `json:"title"`
+type KloginPayload struct {
+	clientID     string
+	username     string
+	password     string
+	grandType    string
+	clientSecret string
 }
 
-type Storage struct {
-	db *gorm.DB
+type LoginPayload struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
+type Client struct {
+	httpClient *http.Client
+}
+
+type KLoginResp struct {
+	AccessToken string `json:"access_token"`
+}
+
+type LoginResp struct {
+	AccessToken string `json:"access_token"`
 }
