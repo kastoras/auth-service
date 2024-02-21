@@ -1,10 +1,4 @@
-package main
-
-import "net/http"
-
-type KeycloakService interface {
-	login(payload *KloginPayload) error
-}
+package login
 
 type KloginPayload struct {
 	clientID     string
@@ -17,10 +11,6 @@ type KloginPayload struct {
 type LoginPayload struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
-}
-
-type Client struct {
-	httpClient *http.Client
 }
 
 type KLoginResp struct {
