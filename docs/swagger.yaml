@@ -50,4 +50,31 @@ paths:
       summary: Logs user in
       tags:
       - authentication
+  /token:
+    post:
+      description: Check if Authentication Bearer token is active
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              type: object
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            type: object
+      summary: Checks if token is valid
+      tags:
+      - authentication
 swagger: "2.0"

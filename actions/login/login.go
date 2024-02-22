@@ -14,7 +14,7 @@ import (
 
 var (
 	endpoint = "protocol/openid-connect/token"
-	cacheKey = "access-token"
+	CacheKey = "access-token"
 )
 
 func keycloackLogin(server *server.APIServer, payload LoginPayload) (KLoginResp, error) {
@@ -67,7 +67,7 @@ func keycloackLogin(server *server.APIServer, payload LoginPayload) (KLoginResp,
 		return KLoginResp{}, errors.New("login failed")
 	}
 
-	cacheKey := fmt.Sprintf("%s-%s", cacheKey, kpayload.username)
+	cacheKey := fmt.Sprintf("%s-%s", CacheKey, kpayload.username)
 
 	server.Cache().Set(cacheKey, kloginresp.AccessToken, time.Duration(kloginresp.Expiration*float64(time.Second)))
 
