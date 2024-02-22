@@ -8,6 +8,7 @@ type APIServer struct {
 	addres    string
 	client    *Client
 	keycloack *KeycloackClient
+	cache     *Cache
 }
 
 type Client struct {
@@ -19,4 +20,12 @@ type KeycloackClient = struct {
 	ClientID        string
 	ClientSecret    string
 	ClientGrandType string
+}
+
+type Cache struct{}
+
+type RedisCacheClient = struct {
+	Host     string
+	Password string
+	DB       int
 }

@@ -6,6 +6,19 @@ import (
 	"net/http"
 )
 
+// User Login
+//
+// @Summary      Logs user in
+// @Description  api health
+// @Tags         authentication
+// @Accept       json
+// @Produce      json
+// @Param        request body  login.LoginPayload true "Login Credentials"
+// @Success      200  {array}   login.LoginResp
+// @Failure      400  {object}  interface{}
+// @Failure      404  {object}  interface{}
+// @Failure      500  {object}  interface{}
+// @Router       /login [post]
 func HandleLogin(server *server.APIServer) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var payload LoginPayload

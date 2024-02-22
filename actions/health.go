@@ -8,20 +8,25 @@ import (
 )
 
 type HealthRes struct {
-	Status  string `json:"status"`
-	Version string `json:"version"`
+	ServerStatus string `json:"server-status"`
+	CacheStatus  string `json:"cache-status"`
+	Version      string `json:"version"`
 }
 
 func HandleAPIHealth(server *server.APIServer) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Add("Content-Type", "application/json")
-		w.WriteHeader(200)
 
 		currentAPIVersion := helpers.GetEnvParam("API_VERSION", "")
 
+		cacheStatus := server.Cache().Ping()
+
+		w.Header().Add("Content-Type", "application/json")
+		w.WriteHeader(200)
+
 		res := &HealthRes{
-			Status:  "running",
-			Version: currentAPIVersion,
+			ServerStatus: "running",
+			CacheStatus:  cacheStatus,
+			Version:      currentAPIVersion,
 		}
 		json.NewEncoder(w).Encode(res)
 	}

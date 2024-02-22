@@ -6,6 +6,10 @@ import (
 	"auth-service/server"
 
 	"github.com/gorilla/mux"
+
+	_ "auth-service/docs"
+
+	httpSwagger "github.com/swaggo/http-swagger/v2"
 )
 
 type HandlerContext struct {
@@ -16,6 +20,8 @@ func RegisterAPIRoutes(router *mux.Router, server *server.APIServer) *mux.Router
 
 	router.HandleFunc("/health", actions.HandleAPIHealth(server)).Methods("GET")
 	router.HandleFunc("/login", login.HandleLogin(server)).Methods("POST")
+
+	router.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
 
 	return router
 }

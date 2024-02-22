@@ -8,10 +8,11 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func NewAPIServer(addres string) *APIServer {
+func NewAPIServer() *APIServer {
 	httpClient := &http.Client{}
+	createCacheClient()
 	return &APIServer{
-		addres: addres,
+		addres: helpers.GetEnvParam("SERVICE_PORT", "3030"),
 		client: &Client{
 			httpClient: httpClient,
 		},
@@ -21,12 +22,17 @@ func NewAPIServer(addres string) *APIServer {
 			ClientSecret:    helpers.GetEnvParam("KEYCKLOACK_CLIENT_SECRET", ""),
 			ClientGrandType: helpers.GetEnvParam("KEYCKLOACK_GRAND_TYPE", ""),
 		},
+		cache: &Cache{},
 	}
 }
 
-func (s *APIServer) Run(router *mux.Router) {
+func (s *APIServer) Start(router *mux.Router) {
 	http.ListenAndServe(s.addres, router)
 	fmt.Println("Server started...")
+}
+
+func (s *APIServer) Shutdown() {
+	closeCacheClient()
 }
 
 func (s *APIServer) Client() *http.Client {
@@ -35,4 +41,8 @@ func (s *APIServer) Client() *http.Client {
 
 func (s *APIServer) KCClient() *KeycloackClient {
 	return s.keycloack
+}
+
+func (s *APIServer) Cache() *Cache {
+	return s.cache
 }

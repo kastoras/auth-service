@@ -9,10 +9,12 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 )
 
 var (
 	endpoint = "protocol/openid-connect/token"
+	cacheKey = "access-token"
 )
 
 func keycloackLogin(server *server.APIServer, payload LoginPayload) (KLoginResp, error) {
@@ -64,6 +66,10 @@ func keycloackLogin(server *server.APIServer, payload LoginPayload) (KLoginResp,
 		fmt.Printf("Error : Failed to parse keycloak response %v \n", err)
 		return KLoginResp{}, errors.New("login failed")
 	}
+
+	cacheKey := fmt.Sprintf("%s-%s", cacheKey, kpayload.username)
+
+	server.Cache().Set(cacheKey, kloginresp.AccessToken, time.Duration(kloginresp.Expiration*float64(time.Second)))
 
 	return kloginresp, nil
 }

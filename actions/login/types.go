@@ -14,7 +14,8 @@ type LoginPayload struct {
 }
 
 type KLoginResp struct {
-	AccessToken string `json:"access_token"`
+	AccessToken string  `json:"access_token"`
+	Expiration  float64 `json:"expires_in"`
 }
 
 type LoginResp struct {
