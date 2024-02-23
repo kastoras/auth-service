@@ -1,5 +1,11 @@
 package token
 
+import "auth-service/server"
+
+type TokenController struct {
+	Server *server.APIServer
+}
+
 type JWTContent struct{}
 
 type KeycloakTokenIntrospectPayload struct {

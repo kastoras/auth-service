@@ -1,4 +1,13 @@
 definitions:
+  actions.HealthRes:
+    properties:
+      cache-status:
+        type: string
+      server-status:
+        type: string
+      version:
+        type: string
+    type: object
   login.LoginPayload:
     properties:
       password:
@@ -14,11 +23,28 @@ definitions:
 info:
   contact: {}
 paths:
+  /health:
+    get:
+      description: Check's the health of the api and all its components
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/actions.HealthRes'
+        "500":
+          description: Internal Server Error
+          schema:
+            type: object
+      summary: Checks the health of the API
+      tags:
+      - information
   /login:
     post:
       consumes:
       - application/json
-      description: api health
+      description: Creates an jwt token for the credentials provided
       parameters:
       - description: Login Credentials
         in: body
@@ -32,9 +58,7 @@ paths:
         "200":
           description: OK
           schema:
-            items:
-              $ref: '#/definitions/login.LoginResp'
-            type: array
+            $ref: '#/definitions/login.LoginResp'
         "400":
           description: Bad Request
           schema:
@@ -47,7 +71,7 @@ paths:
           description: Internal Server Error
           schema:
             type: object
-      summary: Logs user in
+      summary: Creates an authorization token
       tags:
       - authentication
   /token:
@@ -59,9 +83,7 @@ paths:
         "200":
           description: OK
           schema:
-            items:
-              type: object
-            type: array
+            type: object
         "401":
           description: Unauthorized
           schema:

@@ -2,7 +2,6 @@ package token
 
 import (
 	"auth-service/helpers"
-	"auth-service/server"
 	"encoding/json"
 	"errors"
 	"net/http"
@@ -15,9 +14,9 @@ var (
 	endpoint = "protocol/openid-connect/token/introspect"
 )
 
-func IsTokenActive(server server.APIServer, jwtTokenInfo *jwt.MapClaims, jwtToken string) error {
+func (tc *TokenController) IsTokenActive(jwtTokenInfo *jwt.MapClaims, jwtToken string) error {
 
-	keycloack := server.KCClient()
+	keycloack := tc.Server.KCClient()
 
 	kpayload := &KeycloakTokenIntrospectPayload{
 		ClientID:     keycloack.ClientID,
@@ -30,7 +29,7 @@ func IsTokenActive(server server.APIServer, jwtTokenInfo *jwt.MapClaims, jwtToke
 		return err
 	}
 
-	host := helpers.BuildKeyclaockAPIUrl(server.KCClient().Host, endpoint)
+	host := helpers.BuildKeyclaockAPIUrl(tc.Server.KCClient().Host, endpoint)
 
 	req, err := http.NewRequest("POST", host, strings.NewReader(encodedFormData))
 	if err != nil {
@@ -39,7 +38,7 @@ func IsTokenActive(server server.APIServer, jwtTokenInfo *jwt.MapClaims, jwtToke
 
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 
-	resp, err := server.Client().Do(req)
+	resp, err := tc.Server.Client().Do(req)
 	if err != nil {
 		return err
 	}
@@ -58,7 +57,7 @@ func IsTokenActive(server server.APIServer, jwtTokenInfo *jwt.MapClaims, jwtToke
 		return errors.New("fail: inactive token")
 	}
 
-	go storeTokenToCache(&server, &kResp, jwtTokenInfo, jwtToken)
+	tc.storeTokenToCache(&kResp, jwtTokenInfo, jwtToken)
 
 	return nil
 }

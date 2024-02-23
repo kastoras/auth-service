@@ -8,13 +8,13 @@ import (
 
 // User Login
 //
-// @Summary      Logs user in
-// @Description  api health
+// @Summary      Creates an authorization token
+// @Description  Creates an jwt token for the credentials provided
 // @Tags         authentication
 // @Accept       json
 // @Produce      json
 // @Param        request body  login.LoginPayload true "Login Credentials"
-// @Success      200  {array}   login.LoginResp
+// @Success      200  {object}  login.LoginResp
 // @Failure      400  {object}  interface{}
 // @Failure      404  {object}  interface{}
 // @Failure      500  {object}  interface{}

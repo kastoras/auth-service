@@ -2,7 +2,6 @@ package token
 
 import (
 	"auth-service/actions/login"
-	"auth-service/server"
 	"errors"
 	"fmt"
 	"time"
@@ -10,12 +9,12 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 )
 
-func checkInCache(server *server.APIServer, jwtInfo *jwt.MapClaims) (string, error) {
+func (tc *TokenController) checkInCache(jwtInfo *jwt.MapClaims) (string, error) {
 	tokenInfo := *jwtInfo
 
 	cachekey := fmt.Sprintf("%s-%s", login.CacheKey, tokenInfo["preferred_username"])
 
-	value, err := server.Cache().Get(cachekey)
+	value, err := tc.Server.Cache().Get(cachekey)
 	if err != nil {
 		return "", errors.New("error: no token in cache for user")
 	}
@@ -23,7 +22,7 @@ func checkInCache(server *server.APIServer, jwtInfo *jwt.MapClaims) (string, err
 	return value, nil
 }
 
-func storeTokenToCache(server *server.APIServer, kresp *KeycloakResp, jwtInfo *jwt.MapClaims, jwt string) {
+func (tc *TokenController) storeTokenToCache(kresp *KeycloakResp, jwtInfo *jwt.MapClaims, jwt string) {
 
 	tokenInfo := *jwtInfo
 
@@ -31,5 +30,5 @@ func storeTokenToCache(server *server.APIServer, kresp *KeycloakResp, jwtInfo *j
 
 	cachekey := fmt.Sprintf("%s-%s", login.CacheKey, tokenInfo["preferred_username"])
 
-	server.Cache().Set(cachekey, jwt, time.Duration(expire*int64(time.Second)))
+	tc.Server.Cache().Set(cachekey, jwt, time.Duration(expire*int64(time.Second)))
 }

@@ -15,9 +15,35 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/health": {
+            "get": {
+                "description": "Check's the health of the api and all its components",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "information"
+                ],
+                "summary": "Checks the health of the API",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/actions.HealthRes"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/login": {
             "post": {
-                "description": "api health",
+                "description": "Creates an jwt token for the credentials provided",
                 "consumes": [
                     "application/json"
                 ],
@@ -27,7 +53,7 @@ const docTemplate = `{
                 "tags": [
                     "authentication"
                 ],
-                "summary": "Logs user in",
+                "summary": "Creates an authorization token",
                 "parameters": [
                     {
                         "description": "Login Credentials",
@@ -43,10 +69,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/login.LoginResp"
-                            }
+                            "$ref": "#/definitions/login.LoginResp"
                         }
                     },
                     "400": {
@@ -84,10 +107,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "object"
-                            }
+                            "type": "object"
                         }
                     },
                     "401": {
@@ -113,6 +133,20 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "actions.HealthRes": {
+            "type": "object",
+            "properties": {
+                "cache-status": {
+                    "type": "string"
+                },
+                "server-status": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                }
+            }
+        },
         "login.LoginPayload": {
             "type": "object",
             "properties": {

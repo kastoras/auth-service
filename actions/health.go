@@ -13,6 +13,15 @@ type HealthRes struct {
 	Version      string `json:"version"`
 }
 
+// API's Health Check
+//
+// @Summary      Checks the health of the API
+// @Description  Check's the health of the api and all its components
+// @Tags         information
+// @Produce      json
+// @Success      200  {object}  actions.HealthRes
+// @Failure      500  {object}  interface{}
+// @Router       /health [get]
 func HandleAPIHealth(server *server.APIServer) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 

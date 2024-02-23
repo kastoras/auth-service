@@ -4,6 +4,12 @@ import (
 	"auth-service/helpers"
 	"auth-service/server"
 	"net/http"
+	"sync"
+)
+
+var (
+	tc   *TokenController
+	once sync.Once
 )
 
 // Token Check
@@ -12,12 +18,18 @@ import (
 // @Description  Check if Authentication Bearer token is active
 // @Tags         authentication
 // @Produce      json
-// @Success      200  {array}   interface{}
+// @Success      200  {object}   interface{}
 // @Failure      401  {object}  interface{}
 // @Failure      404  {object}  interface{}
 // @Failure      500  {object}  interface{}
 // @Router       /token [post]
 func Handle(server *server.APIServer) http.HandlerFunc {
+
+	tc := getInstance()
+	if tc.Server == nil {
+		tc.Server = server
+	}
+
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		authHeader := r.Header.Get("Authorization")
@@ -34,7 +46,7 @@ func Handle(server *server.APIServer) http.HandlerFunc {
 			return
 		}
 
-		err = checkTokenValidy(server, &jwtInfo, jwt)
+		err = tc.checkTokenValidy(&jwtInfo, jwt)
 		if err != nil {
 			failedResp(&w, http.StatusUnauthorized, "")
 			return
@@ -42,6 +54,13 @@ func Handle(server *server.APIServer) http.HandlerFunc {
 
 		successResp(&w)
 	}
+}
+
+func getInstance() *TokenController {
+	once.Do(func() {
+		tc = &TokenController{}
+	})
+	return tc
 }
 
 func failedResp(w *http.ResponseWriter, code int, errorMsg string) {
