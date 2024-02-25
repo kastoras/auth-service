@@ -3,6 +3,7 @@ package main
 import (
 	"auth-service/routes"
 	"auth-service/server"
+	"fmt"
 
 	"github.com/gorilla/mux"
 )
@@ -14,5 +15,6 @@ func main() {
 
 	router = routes.RegisterAPIRoutes(router, server)
 
+	fmt.Println("Server start...")
 	server.Start(router)
 }

@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
-	"net/url"
 	"strings"
 	"time"
 )
@@ -22,22 +21,17 @@ func keycloackLogin(server *server.APIServer, payload LoginPayload) (KLoginResp,
 	keycloack := server.KCClient()
 
 	kpayload := &KloginPayload{
-		clientID:     keycloack.ClientID,
-		username:     payload.Username,
-		password:     payload.Password,
-		grandType:    keycloack.ClientGrandType,
-		clientSecret: keycloack.ClientSecret,
+		ClientID:     keycloack.ClientID,
+		Username:     payload.Username,
+		Password:     payload.Password,
+		GrandType:    keycloack.ClientGrandType,
+		ClientSecret: keycloack.ClientSecret,
 	}
 
-	formData := url.Values{
-		"client_id":     {kpayload.clientID},
-		"username":      {kpayload.username},
-		"password":      {kpayload.password},
-		"grant_type":    {kpayload.grandType},
-		"client_secret": {kpayload.clientSecret},
+	encodedFormData, err := helpers.EncodeForKeycloakRequest(*kpayload)
+	if err != nil {
+		return KLoginResp{}, err
 	}
-
-	encodedFormData := formData.Encode()
 
 	host := helpers.BuildKeyclaockAPIUrl(server.KCClient().Host, endpoint)
 
@@ -67,7 +61,7 @@ func keycloackLogin(server *server.APIServer, payload LoginPayload) (KLoginResp,
 		return KLoginResp{}, errors.New("login failed")
 	}
 
-	cacheKey := fmt.Sprintf("%s-%s", CacheKey, kpayload.username)
+	cacheKey := fmt.Sprintf("%s-%s", CacheKey, kpayload.Username)
 
 	server.Cache().Set(cacheKey, kloginresp.AccessToken, time.Duration(kloginresp.Expiration*float64(time.Second)))
 

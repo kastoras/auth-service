@@ -2,7 +2,6 @@ package server
 
 import (
 	"auth-service/helpers"
-	"fmt"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -28,7 +27,6 @@ func NewAPIServer() *APIServer {
 
 func (s *APIServer) Start(router *mux.Router) {
 	http.ListenAndServe(s.addres, router)
-	fmt.Println("Server started...")
 }
 
 func (s *APIServer) Shutdown() {

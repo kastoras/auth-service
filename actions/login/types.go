@@ -1,11 +1,11 @@
 package login
 
 type KloginPayload struct {
-	clientID     string
-	username     string
-	password     string
-	grandType    string
-	clientSecret string
+	ClientID     string `json:"client_id"`
+	Username     string `json:"username"`
+	Password     string `json:"password"`
+	GrandType    string `json:"grant_type"`
+	ClientSecret string `json:"client_secret"`
 }
 
 type LoginPayload struct {
