@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-02-27T14:31:53.090Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="E8V0Od6FknUgoJoNmwGw" version="23.1.5" type="device">
+<mxfile host="Electron" modified="2024-02-22T22:07:30.992Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="vZQgp-LmcL56C5vABDql" version="23.1.5" type="device">
   <diagram name="Page-1" id="v6792liOFd4qm17gx1AZ">
-    <mxGraphModel dx="5733" dy="2663" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="3066" dy="1836" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -194,77 +194,6 @@
         </mxCell>
         <mxCell id="x0J9yiKAGYjtZlHYhsLJ-33" value="Check Token" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="x0J9yiKAGYjtZlHYhsLJ-34" vertex="1">
           <mxGeometry width="130" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-2" value="" style="group" vertex="1" connectable="0" parent="1">
-          <mxGeometry x="-1810" y="-260" width="500" height="860" as="geometry" />
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-3" value="" style="rounded=0;whiteSpace=wrap;html=1;gradientColor=none;fillColor=none;" vertex="1" parent="pgQq5QvTGWh927fCULeN-2">
-          <mxGeometry width="500" height="860" as="geometry" />
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-4" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="pgQq5QvTGWh927fCULeN-2">
-          <mxGeometry x="210" y="50" width="30" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-5" value="Get Admin Token" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" vertex="1" parent="pgQq5QvTGWh927fCULeN-2">
-          <mxGeometry x="165" y="220" width="120" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="pgQq5QvTGWh927fCULeN-2" source="pgQq5QvTGWh927fCULeN-4" target="pgQq5QvTGWh927fCULeN-5">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-7" value="Is Token Cached" style="rhombus;whiteSpace=wrap;html=1;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" vertex="1" parent="pgQq5QvTGWh927fCULeN-2">
-          <mxGeometry x="185" y="380" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="pgQq5QvTGWh927fCULeN-2" source="pgQq5QvTGWh927fCULeN-5" target="pgQq5QvTGWh927fCULeN-7">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="pgQq5QvTGWh927fCULeN-2" source="pgQq5QvTGWh927fCULeN-7" target="pgQq5QvTGWh927fCULeN-10">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="460" y="470" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-10" value="Refresh Token" style="ellipse;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;fillColor=#008a00;strokeColor=#FFFFFF;fontColor=#ffffff;strokeWidth=2;" vertex="1" parent="pgQq5QvTGWh927fCULeN-2">
-          <mxGeometry x="320" y="540" width="120" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-11" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="pgQq5QvTGWh927fCULeN-2">
-          <mxGeometry x="225" y="770" width="40" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-12" value="Create Token" style="ellipse;whiteSpace=wrap;html=1;fillColor=#008a00;strokeColor=#005700;fontColor=#ffffff;" vertex="1" parent="pgQq5QvTGWh927fCULeN-2">
-          <mxGeometry x="30" y="460" width="120" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="pgQq5QvTGWh927fCULeN-2" source="pgQq5QvTGWh927fCULeN-7" target="pgQq5QvTGWh927fCULeN-12">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-14" value="Store to cache" style="ellipse;whiteSpace=wrap;html=1;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" vertex="1" parent="pgQq5QvTGWh927fCULeN-2">
-          <mxGeometry x="30" y="580" width="120" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="pgQq5QvTGWh927fCULeN-2" source="pgQq5QvTGWh927fCULeN-12" target="pgQq5QvTGWh927fCULeN-14">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-16" value="Auth Api" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" vertex="1" parent="pgQq5QvTGWh927fCULeN-2">
-          <mxGeometry x="55" y="50" width="70" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-17" value="Keycloak" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#60a917;strokeColor=#2D7600;fontColor=#ffffff;" vertex="1" parent="pgQq5QvTGWh927fCULeN-2">
-          <mxGeometry x="55" y="100" width="70" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-18" value="Redis" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" vertex="1" parent="pgQq5QvTGWh927fCULeN-2">
-          <mxGeometry x="55" y="150" width="70" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-19" value="An action that needs admin privileges in order to get data from keycloak" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="pgQq5QvTGWh927fCULeN-2">
-          <mxGeometry x="255" y="60" width="205" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="pgQq5QvTGWh927fCULeN-2" source="pgQq5QvTGWh927fCULeN-21" target="pgQq5QvTGWh927fCULeN-11">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-21" value="Return Token" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" vertex="1" parent="pgQq5QvTGWh927fCULeN-2">
-          <mxGeometry x="185" y="650" width="120" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="pgQq5QvTGWh927fCULeN-2" source="pgQq5QvTGWh927fCULeN-10" target="pgQq5QvTGWh927fCULeN-21">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-23" value="AdminToken" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="pgQq5QvTGWh927fCULeN-2">
-          <mxGeometry width="130" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="pgQq5QvTGWh927fCULeN-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="pgQq5QvTGWh927fCULeN-2" source="pgQq5QvTGWh927fCULeN-14" target="pgQq5QvTGWh927fCULeN-21">
-          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
