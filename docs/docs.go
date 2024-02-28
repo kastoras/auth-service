@@ -136,6 +136,9 @@ const docTemplate = `{
         "actions.HealthRes": {
             "type": "object",
             "properties": {
+                "admin-token": {
+                    "type": "string"
+                },
                 "cache-status": {
                     "type": "string"
                 },

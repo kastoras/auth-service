@@ -1,6 +1,8 @@
 definitions:
   actions.HealthRes:
     properties:
+      admin-token:
+        type: string
       cache-status:
         type: string
       server-status:
