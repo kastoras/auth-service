@@ -3,6 +3,7 @@ package routes
 import (
 	"auth-service/actions"
 	"auth-service/actions/login"
+	master_groups "auth-service/actions/master/groups"
 	"auth-service/actions/token"
 	"auth-service/server"
 
@@ -23,6 +24,8 @@ func RegisterAPIRoutes(router *mux.Router, server *server.APIServer) *mux.Router
 
 	router.HandleFunc("/login", login.HandleLogin(server)).Methods("POST")
 	router.HandleFunc("/token", token.Handle(server)).Methods("POST")
+
+	router.HandleFunc("/groups", master_groups.Handle(server)).Methods("GET")
 
 	router.PathPrefix("/swagger").Handler(httpSwagger.WrapHandler)
 

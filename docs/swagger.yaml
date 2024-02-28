@@ -22,9 +22,50 @@ definitions:
       access_token:
         type: string
     type: object
+  master_groups.RealmGroup:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  master_groups.Response:
+    properties:
+      groups:
+        items:
+          $ref: '#/definitions/master_groups.RealmGroup'
+        type: array
+    type: object
 info:
   contact: {}
 paths:
+  /groups:
+    get:
+      consumes:
+      - application/json
+      description: Returns the groups a user can be assigned
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/master_groups.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            type: object
+      summary: Return application user groups
+      tags:
+      - managment
   /health:
     get:
       description: Check's the health of the api and all its components

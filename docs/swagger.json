@@ -4,6 +4,47 @@
         "contact": {}
     },
     "paths": {
+        "/groups": {
+            "get": {
+                "description": "Returns the groups a user can be assigned",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "managment"
+                ],
+                "summary": "Return application user groups",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/master_groups.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/health": {
             "get": {
                 "description": "Check's the health of the api and all its components",
@@ -155,6 +196,28 @@
             "properties": {
                 "access_token": {
                     "type": "string"
+                }
+            }
+        },
+        "master_groups.RealmGroup": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "master_groups.Response": {
+            "type": "object",
+            "properties": {
+                "groups": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/master_groups.RealmGroup"
+                    }
                 }
             }
         }
