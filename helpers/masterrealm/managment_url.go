@@ -5,10 +5,9 @@ import (
 	"fmt"
 )
 
-func GetManagmentUrl(action string) string {
+func GetManagmentUrl(action string, realm string) string {
 
 	url := helpers.GetEnvParam("KEYCKLOACK_ADMIN_MANAGMENT_HOST", "")
-	realm := helpers.GetEnvParam("KEYCLOAK_APP_REALM", "")
 
 	managmentUrl := fmt.Sprintf("%s/%s/%s", url, realm, action)
 

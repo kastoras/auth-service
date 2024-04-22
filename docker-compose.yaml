@@ -9,6 +9,7 @@ services:
       - ./:/app
     depends_on:
       - redis-cache
+      - mongodb
 
   redis-cache:
     image: redis:7.2-alpine
@@ -21,6 +22,17 @@ services:
     volumes: 
       - rediscache:/data
 
+  mongodb:    
+    image: mongo:4.4.15    
+    ports:
+      - 27023:27017
+    restart: always    
+    volumes:
+      - authservidedata:/data/db
+
 volumes:
   rediscache:
-    driver: local            
+    driver: local
+  authservidedata:
+    driver: local
+

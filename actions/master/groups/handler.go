@@ -17,11 +17,9 @@ var (
 // @Summary      Return application user groups
 // @Description  Returns the groups a user can be assigned
 // @Tags         managment
-// @Accept       json
 // @Produce      json
 // @Success      200  {object}  master_groups.Response
-// @Failure      400  {object}  interface{}
-// @Failure      404  {object}  interface{}
+// @Success      204  {object}  interface{}
 // @Failure      500  {object}  interface{}
 // @Router       /groups [get]
 func Handle(server *server.APIServer) http.HandlerFunc {
@@ -33,17 +31,20 @@ func Handle(server *server.APIServer) http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
 
-		groups, err := mgc.keycloackGroups()
-		if err != nil {
-			failedResp(&w, 400, err.Error())
+		groups, err := mgc.getFromCache()
+
+		if err == nil {
+			successResp(&w, &groups)
 			return
 		}
 
-		res := &Response{
-			Groups: groups,
+		groups, err = mgc.keycloackGroups()
+		if err != nil {
+			failedResp(&w, http.StatusInternalServerError, err.Error())
+			return
 		}
 
-		successResp(&w, 200, res)
+		successResp(&w, &groups)
 	}
 }
 
@@ -60,7 +61,27 @@ func failedResp(w *http.ResponseWriter, errorCode int, errorMsg string) {
 	writer.Write([]byte(errorMsg))
 }
 
-func successResp(w *http.ResponseWriter, code int, resp *Response) {
+func successResp(w *http.ResponseWriter, groups *[]RealmGroup) {
+
+	if groups == nil || len(*groups) == 0 {
+		successNoContent(w)
+		return
+	}
+
+	resp := &Response{
+		Groups: *groups,
+	}
+
+	successWithData(w, resp)
+}
+
+func successNoContent(w *http.ResponseWriter) {
+	writer := *w
+	writer.Header().Add("Content-Type", "application/json")
+	writer.WriteHeader(http.StatusNoContent)
+}
+
+func successWithData(w *http.ResponseWriter, resp *Response) {
 	writer := *w
 	writer.Header().Add("Content-Type", "application/json")
 	writer.WriteHeader(http.StatusOK)

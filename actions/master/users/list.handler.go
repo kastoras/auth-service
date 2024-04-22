@@ -12,6 +12,20 @@ var (
 	once sync.Once
 )
 
+// Get users
+//
+// @Summary      Get users
+// @Description  Get users with pagination in for current realm
+// @Tags         users
+// @Accept       json
+// @Produce      json
+// @Param        limit query  int false "Limit"
+// @Param        page query  int false "Page"
+// @Success      201  {object}  interface{}
+// @Failure      404  {object}  interface{}
+// @Failure      409  {object}  interface{}
+// @Failure      500  {object}  interface{}
+// @Router       /users [get]
 func Handle(server *server.APIServer) http.HandlerFunc {
 
 	muc := getInstance()

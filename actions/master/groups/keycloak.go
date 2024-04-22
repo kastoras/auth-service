@@ -1,7 +1,6 @@
 package master_groups
 
 import (
-	"auth-service/helpers"
 	master_realm "auth-service/helpers/masterrealm"
 	master_token "auth-service/helpers/masterrealm/token"
 	"encoding/json"
@@ -12,14 +11,12 @@ import (
 
 var (
 	endpoint        = "ui-ext/groups"
-	realm           = helpers.GetEnvParam("KEYCLOAK_APP_REALM", "")
-	cacheKey        = fmt.Sprintf("%s-groups", realm)
 	cacheExpiration = 300
 )
 
 func (mgc *MasterGroupsController) keycloackGroups() ([]RealmGroup, error) {
 
-	host := master_realm.GetManagmentUrl(endpoint)
+	host := master_realm.GetManagmentUrl(endpoint, mgc.server.KCClient().Realm)
 
 	req, err := http.NewRequest("GET", host, nil)
 	if err != nil {

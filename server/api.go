@@ -15,12 +15,6 @@ func NewAPIServer() *APIServer {
 		client: &Client{
 			httpClient: httpClient,
 		},
-		keycloack: &KeycloackClient{
-			Host:            helpers.GetEnvParam("KEYCKLOACK_HOST", ""),
-			ClientID:        helpers.GetEnvParam("KEYCKLOACK_CLIENT_ID", ""),
-			ClientSecret:    helpers.GetEnvParam("KEYCKLOACK_CLIENT_SECRET", ""),
-			ClientGrandType: helpers.GetEnvParam("KEYCKLOACK_GRAND_TYPE", ""),
-		},
 		cache: &Cache{},
 	}
 }
