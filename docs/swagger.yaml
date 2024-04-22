@@ -1,6 +1,8 @@
 definitions:
   actions.HealthRes:
     properties:
+      admin-token:
+        type: string
       cache-status:
         type: string
       server-status:
@@ -20,9 +22,61 @@ definitions:
       access_token:
         type: string
     type: object
+  master_groups.RealmGroup:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  master_groups.Response:
+    properties:
+      groups:
+        items:
+          $ref: '#/definitions/master_groups.RealmGroup'
+        type: array
+    type: object
+  register.RegisterPayload:
+    properties:
+      email:
+        type: string
+      firstname:
+        type: string
+      groups:
+        items:
+          type: string
+        type: array
+      lastname:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    type: object
 info:
   contact: {}
 paths:
+  /groups:
+    get:
+      description: Returns the groups a user can be assigned
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/master_groups.Response'
+        "204":
+          description: No Content
+          schema:
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            type: object
+      summary: Return application user groups
+      tags:
+      - managment
   /health:
     get:
       description: Check's the health of the api and all its components
@@ -74,6 +128,40 @@ paths:
       summary: Creates an authorization token
       tags:
       - authentication
+  /register:
+    post:
+      consumes:
+      - application/json
+      description: Creates a new user in user group client
+      parameters:
+      - description: User Data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/register.RegisterPayload'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+        "409":
+          description: Conflict
+          schema:
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            type: object
+      summary: Creates a new user
+      tags:
+      - authentication
   /token:
     post:
       description: Check if Authentication Bearer token is active
@@ -99,4 +187,40 @@ paths:
       summary: Checks if token is valid
       tags:
       - authentication
+  /users:
+    get:
+      consumes:
+      - application/json
+      description: Get users with pagination in for current realm
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+        "409":
+          description: Conflict
+          schema:
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            type: object
+      summary: Get users
+      tags:
+      - users
 swagger: "2.0"
